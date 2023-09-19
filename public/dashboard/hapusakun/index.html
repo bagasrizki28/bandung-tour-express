@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Password</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="login">
+        <form name="login" class="parent">
+          <h1>Hapus Akun</h1>
+          <hr />
+          <p>BANDUNG TOUR WEB</p>
+          <label for="">Email</label>
+          <input
+            name="email"
+            class="user-id"
+            type="text"
+            placeholder="Email anda"
+            required
+            autofocus
+          />
+          <label for="">Kata Sandi</label>
+          <input
+            name="password"
+            class="user-pass"
+            type="password"
+            placeholder="Kata Sandi"
+            required
+          />
+          <input type="button" class="submiting" value="Log In!" required />
+          <a class="home" href="http://localhost:3000/dashboard/homepage/index.html"
+            >Kembali ke Beranda</a
+          >
+        </form>
+      </div>
+
+      <div class="right">
+        <img src="../img/Asia Afrika1.jpg" alt="" />
+      </div>
+    </div>
+
+    <script>
+      const searchParams = new URLSearchParams(location.search);
+
+      fetch(`/api/changepassword/${searchParams.get("email")}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          document.edit.email.value = data.email;
+          document.edit.password.value = data.password;
+        });
+
+      document.querySelector("button").onclick = async (e) => {
+        e.preventDefault();
+        const nim = document.edit.email.value;
+        const name = document.edit.password.value;
+        await fetch(`/api/changepassword/${searchParams.get("email")}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        });
+        location.href = "/public";
+      };
+    </script>
+  </body>
+</html>

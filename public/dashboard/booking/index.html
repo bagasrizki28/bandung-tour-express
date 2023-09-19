@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Booking</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="book">
+      <form name="addbooking" class="book-form">
+        <div class="form-item">
+          <label for="checkin-date">Tanggal Check-in: </label>
+          <input name="date_check_in" type="date" id="chekin-date" required />
+        </div>
+        <div class="form-item">
+          <label for="checkout-date">Tanggal Check-out: </label>
+          <input name="date_check_out" type="date" id="chekout-date" required />
+        </div>
+        <div class="form-item">
+          <label for="adult">Dewasa: </label>
+          <input name="adult" type="number" id="adult" required />
+        </div>
+        <div class="form-item">
+          <label for="children">Anak-anak: </label>
+          <input name="child" type="number" id="children" required />
+        </div>
+        <div class="form-item">
+          <label for="rooms">Tipe Kamar: </label>
+          <input name="room_type" type="number" id="rooms" required />
+        </div>
+        <div class="form-item">
+          <button id="submit-add" class="btn">Booking Sekarang</button>
+        </div>
+        <p><a href="/dashboard/homepage/index.html">Kembali ke Beranda</a></p>
+      </form>
+    </div>
+
+    <section class="rooms sec-width" id="rooms">
+      <div class="title"></div>
+      <div class="rooms-container">
+        <article class="room">
+          <div class="room-image">
+            <img src="../img/backpacke.jpg" alt="room image" />
+          </div>
+          <div class="room-text">
+            <h3>Tipe Kamar 1</h3>
+            <ul>
+              <li>
+                <i class="ri-checkbox-circle-line"></i>
+                2 Kasur
+              </li>
+              <li>
+                <i class="ri-checkbox-circle-line"></i>
+                Fasilitas Toilet, Ac, Dll.
+              </li>
+              <li>
+                <i class="ri-checkbox-circle-line"></i>
+                Non-VIP
+              </li>
+            </ul>
+            <p>
+              Tipe Kamar Backpacker yang murah meriah pas disaku, dengan 2 Kasur
+              serta fasilitas umum tersedia.
+            </p>
+            <p class="rate"><span>Rp. 59.900,- /</span> Per Malam</p>
+          </div>
+        </article>
+
+        <article class="room">
+          <div class="room-image">
+            <img src="../img/aston.jpg" alt="room image" />
+          </div>
+          <div class="room-text">
+            <h3>Tipe Kamar 2</h3>
+            <ul>
+              <li>
+                <i class="ri-checkbox-circle-line"></i>
+                2 Kasur
+              </li>
+              <li>
+                <i class="ri-checkbox-circle-line"></i>
+                Fasilitas Toilet (Shower), Ac, Tv, Dll.
+              </li>
+              <li>
+                <i class="ri-checkbox-circle-line"></i>
+                Mid-VIP
+              </li>
+            </ul>
+            <p>
+              Kamar luas ditemani dengan View pemandangan yang bagus akan
+              menemani pengalaman menginap anda selama di bandung bersama
+              Keluarga.
+            </p>
+            <p class="rate"><span>Rp. 129.900,- /</span> Per Malam</p>
+          </div>
+        </article>
+
+        <article class="room">
+          <div class="room-image">
+            <img src="../img/grandtjokoro.png" alt="room image" />
+          </div>
+          <div class="room-text">
+            <h3>Tipe Kamar 3</h3>
+            <ul>
+              <li>
+                <i class="ri-checkbox-circle-line"></i>
+                2 Kasur
+              </li>
+              <li>
+                <i class="ri-checkbox-circle-line"></i>
+                Full Fasilitas.
+              </li>
+              <li>
+                <i class="ri-checkbox-circle-line"></i>
+                VVIP
+              </li>
+            </ul>
+            <p>
+              Kamar mewah yang menyediakan banyak berbagai fitur ruangan serta
+              fasilitas mewah lainnya.
+            </p>
+            <p class="rate"><span>Rp.189,900,- /</span> Per Malam</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <script>
+      document.addbooking.onsubmit = async (e) => {
+        e.preventDefault();
+        const date_check_in = document.addbooking.date_check_in.value;
+        const date_check_out = document.addbooking.date_check_out.value;
+        const adult = document.addbooking.adult.value;
+        const child = document.addbooking.child.value;
+        const room_type = document.addbooking.room_type.value;
+
+        await fetch("/api/roombooking", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            date_check_in,
+            date_check_out,
+            adult,
+            child,
+            room_type,
+          }),
+        });
+        location.href = "/dashboard/infobooking/index.html";
+      };
+    </script>
+  </body>
+</html>

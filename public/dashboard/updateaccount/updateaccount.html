@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Akun</title>
+    <link rel="stylesheet" type="text/css" href="updateaccount.css" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="login">
+        <form name="edit" class="parent">
+          <h1>Update Akun</h1>
+          <hr />
+          <p>BANDUNG TOUR WEB</p>
+          <label>Username Baru</label>
+          <input
+            name="username"
+            class="user-id"
+            type="text"
+            placeholder="Username"
+            required
+            autofocus
+          />
+          <label>Kata Sandi Baru</label>
+          <input
+            name="password"
+            class="user-pass"
+            type="password"
+            placeholder="Kata Sandi"
+            required
+          />
+          <button class="submiting">Ubah Data</button>
+          <a
+            class="home"
+            href="http://localhost:3000/dashboard/homepage/index.html"
+            >Kembali ke Beranda</a
+          >
+        </form>
+      </div>
+
+      <div class="right">
+        <img src="../img/Asia Afrika1.jpg" alt="" />
+      </div>
+    </div>
+
+    <script>
+      document.edit.onsubmit = async (e) => {
+        e.preventDefault();
+        const username = document.edit.username.value;
+        const password = document.edit.password.value;
+        await fetch("/api/changepassword/", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            username,
+            password,
+          }),
+        });
+        if (confirm(`Apakah perubahan sudah sesuai?`)) {
+          localStorage.removeItem("token");
+          location.href = "/login/login.html";
+        }
+      };
+    </script>
+  </body>
+</html>

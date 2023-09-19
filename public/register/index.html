@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="register.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>Registrasi</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="title">Form Registrasi</div>
+      <form name="register">
+        <div class="inputfield">
+          <label>Nama Depan</label>
+          <input type="text" name="namadepan" required />
+        </div>
+        <div class="inputfield">
+          <label>Nama Belakang</label>
+          <input type="text" name="namabelakang" required />
+        </div>
+        <div class="inputfield">
+          <label>Username</label>
+          <input type="text" name="username" required />
+        </div>
+        <div class="inputfield">
+          <label>Password</label>
+          <input type="password" name="password" required />
+        </div>
+        <div class="inputfield">
+          <label>Jenis Kelamin</label>
+          <div class="custom_select">
+            <select name="jk" class="jeniskelamin" required>
+              <option value="">Pilih</option>
+              <option value="laki-laki">Laki-laki</option>
+              <option value="perempuan">Perempuan</option>
+            </select>
+          </div>
+        </div>
+        <div class="inputfield">
+          <label>Alamat Email</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="example123@email.com"
+            required
+          />
+        </div>
+        <div class="inputfield">
+          <label>Nomor Telepon</label>
+          <input
+            type="text"
+            name="notelp"
+            placeholder="0818XXXXXXXX"
+            required
+          />
+        </div>
+        <div class="inputfield">
+          <label>Alamat</label>
+          <textarea
+            name="alamat"
+            class="textarea"
+            placeholder="Masukkan Alamat"
+            required
+          ></textarea>
+        </div>
+        <div class="inputfield">
+          <label>Foto KTP/Kartu Pelajar</label>
+          <input name="photo" type="file" class="kode-pos" required />
+        </div>
+        <div class="inputfield terms">
+          <label class="check">
+            <input type="checkbox" required />
+            <span class="checkmark"></span>
+          </label>
+          <p>Menyetujui Syarat & Ketentuan.</p>
+        </div>
+        <div class="inputfield">
+          <button>Register</button>
+        </div>
+
+        <div class="link">
+          <a class="logins" href="http://localhost:3000/login/login.html"
+            >Sudah punya akun? Log In!</a
+          >
+          <a class="home" href="/dashboard/homepage/index.html"
+            >Kembali ke Beranda</a
+          >
+        </div>
+      </form>
+    </div>
+
+    <script>
+      document.register.onsubmit = async (e) => {
+        e.preventDefault();
+        const data = new FormData();
+        data.append("nama_depan", document.register.namadepan.value);
+        data.append("nama_belakang", document.register.namabelakang.value);
+        data.append("username", document.register.username.value);
+        data.append("password", document.register.password.value);
+        data.append("jenis_kelamin", document.register.jk.value);
+        data.append("email", document.register.email.value);
+        data.append("no_telp", document.register.notelp.value);
+        data.append("alamat", document.register.alamat.value);
+        data.append("photo", document.register.photo.files[0]);
+        await fetch("/api/register", {
+          method: "POST",
+          body: data,
+        });
+        location.href = "/login/login.html";
+      };
+    </script>
+  </body>
+</html>

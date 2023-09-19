@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Reservasi</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="login">
+        <form name="edit" class="parent">
+          <h1>Ubah Jadwal Reservasi</h1>
+          <hr />
+          <p>BANDUNG TOUR WEB</p>
+          <label>Id Kamar</label>
+          <input name="id_kamar" type="text" autofocus required />
+          <label>Tanggal Check-In</label>
+          <input name="date_check_in" type="date" required />
+          <label>Tanggal Check-Out</label>
+          <input name="date_check_out" type="date" required />
+
+          <button class="submiting">Kirim Perubahan</button>
+          <a class="home" href="/dashboard/homepage/index.html"
+            >Kembali ke Beranda</a
+          >
+        </form>
+      </div>
+
+      <div class="right">
+        <img src="../img/grandtjokoro.png" alt="" />
+      </div>
+    </div>
+
+    <script>
+      const searchParams = new URLSearchParams(location.search);
+
+      fetch(`/api/booking/${searchParams.get("id_kamar")}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          document.edit.id_kamar.value = data.id_kamar;
+          document.edit.date_check_in.value = data.date_check_in;
+          document.edit.date_check_out.value = data.date_check_out;
+        });
+
+      document.querySelector("button").onclick = async (e) => {
+        e.preventDefault();
+        const id_kamar = document.edit.id_kamar.value;
+        const date_check_in = document.edit.date_check_in.value;
+        const date_check_out = document.edit.date_check_out.value;
+        await fetch(`/api/booking/${searchParams.get("id_kamar")}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            id_kamar,
+            date_check_in,
+            date_check_out,
+          }),
+        });
+        location.href = "/dashboard/infobooking/index.html";
+      };
+    </script>
+  </body>
+</html>

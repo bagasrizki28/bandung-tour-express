@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>Detail Reservasi</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="title">Detail Reservasi Kamar Hotel</div>
+      <form name="register">
+        <div class="inputfield1">
+          <label>ID Kamar</label>
+          <label class="id"></label>
+        </div>
+
+        <br />
+
+        <div class="inputfield2">
+          <label>Tanggal Check-In</label>
+          <label class="date-check-in"></label>
+        </div>
+
+        <br />
+
+        <div class="inputfield3">
+          <label>Tanggal Check-Out</label>
+          <label class="date-check-out"></label>
+        </div>
+
+        <br />
+
+        <div class="inputfield4">
+          <label>Jumlah Dewasa</label>
+          <label class="adult"></label>
+        </div>
+
+        <br />
+
+        <div class="inputfield5">
+          <label>Jumlah Anak</label>
+          <label class="child"></label>
+        </div>
+
+        <br />
+
+        <div class="inputfield6">
+          <label>Tipe Kamar</label>
+          <label class="room"></label>
+        </div>
+
+        <div class="link">
+          <a class="home" href="/dashboard/infobooking/index.html">Kembali</a>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      const searchParams = new URLSearchParams(location.search);
+
+      fetch(`/api/booking/${searchParams.get("id_kamar")}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          const inputField = document.querySelector(".inputfield1");
+          const divKamar = document.querySelector(".id");
+          divKamar.textContent = `: ${data.id_kamar}`;
+          inputField.appendChild(divKamar);
+
+          const inputField2 = document.querySelector(".inputfield2");
+          const divDateCheckIn = document.querySelector(".date-check-in");
+          divDateCheckIn.textContent = `: ${data.date_check_in}`;
+          inputField2.appendChild(divDateCheckIn);
+
+          const inputField3 = document.querySelector(".inputfield3");
+          const divDateCheckOut = document.querySelector(".date-check-out");
+          divDateCheckOut.textContent = `: ${data.date_check_out}`;
+          inputField3.appendChild(divDateCheckOut);
+
+          const inputField4 = document.querySelector(".inputfield4");
+          const divAdult = document.querySelector(".adult");
+          divAdult.textContent = `: ${data.adult}`;
+          inputField4.appendChild(divAdult);
+
+          const inputField5 = document.querySelector(".inputfield5");
+          const divChild = document.querySelector(".child");
+          divChild.textContent = `: ${data.child}`;
+          inputField5.appendChild(divChild);
+
+          const inputField6 = document.querySelector(".inputfield6");
+          const divRoomType = document.querySelector(".room");
+          divRoomType.textContent = `: ${data.room_type}`;
+          inputField6.appendChild(divRoomType);
+        });
+    </script>
+  </body>
+</html>

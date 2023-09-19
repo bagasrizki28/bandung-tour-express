@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Selamat datang User!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Bagian Header -->
+    <header class="header" id="header">
+      <div class="head-top">
+        <div class="site-name">
+          <span>BANDUNG TOUR GUIDE</span>
+        </div>
+        <div class="site-nav">
+          <span id="nav-btn"
+            >USER <i class="ri-map-pin-user-line"></i
+          ></span>
+        </div>
+      </div>
+
+      <div class="head-bottom flex">
+        <h2>NIKMATI LIBURAN DENGAN SANTAI</h2>
+        <p>
+          Rasakan pengalaman liburan di Bandung dengan nyaman, aman dan tanpa
+          bingung dengan tujuan liburan didaerah-daerah maupun tempat Wisata
+          Lokal lainnya.
+        </p>
+      </div>
+    </header>
+
+    <!-- Navbar Kanan -->
+    <div class="sidenav" id="sidenav">
+      <span class="cancel-btn" id="cancel-btn">
+        <i class="ri-close-line"></i>
+      </span>
+
+      <ul class="navbar">
+        <li><a href="/dashboard/homepage/index.html">Beranda</a></li>
+        <li><a href="/dashboard/booking/index.html">Booking Kamar Hotel</a></li>
+        <li><a href="/dashboard/infobooking/index.html">Jadwal Booking Anda</a></li>
+        <li><a href="#services">Jenis Pelayanan</a></li>
+        <li><a href="#tour">Tour Guide</a></li>
+      </ul>
+      <a href="/dashboard/updateaccount/updateaccount.html"><button class="btn ganti-password">Update Akun</button></a>
+      <button id="delete-accounts" class="btn delete">Hapus Akun</button>
+      <button id="log-out" class="btn log-out">Log Out</button>
+    </div>
+
+    <!-- fullscreen modal -->
+    <div id="modal"></div>
+
+    <!-- Perkontenan  -->
+    <section class="services sec-width" id="services">
+      <div class="title">
+        <h2>JENIS PELAYANAN</h2>
+      </div>
+      <div class="services-container">
+        <!-- Keterangan 1 -->
+        <article class="service">
+          <div class="service-icon">
+            <span>
+              <i class="ri-map-2-fill"></i>
+            </span>
+          </div>
+          <div class="service-content">
+            <h2>Berwisata dengan Tour Guide</h2>
+            <p>
+              Maksimalkan rasa keingin tahu-an anda bersama kami. Dengan dipandu
+              beberapa Tour Guider Professional anda tidak harus bingung
+              mengeksplor indahnya kota Bandung.
+            </p>
+            <button type="button" class="btn">Coming Soon..</button>
+          </div>
+        </article>
+
+        <!-- Keterangan 2 -->
+        <article class="service">
+          <div class="service-icon">
+            <span>
+              <i class="ri-question-answer-fill"></i>
+            </span>
+          </div>
+          <div class="service-content">
+            <h2>Live Chat Guide</h2>
+            <p>
+              Jangan Khawatir bila anda bingung akan tujuan anda sekarang ini
+              mau kemana. Dengan fitur live chat yang disediakan oleh website
+              kami anda akan mudah terbantu dengan saran dan rekomendasi dari
+              kami.
+            </p>
+            <button type="button" class="btn">Coming Soon..</button>
+          </div>
+        </article>
+
+        <!-- Keterangan 3 -->
+        <article class="service">
+          <div class="service-icon">
+            <span>
+              <i class="ri-community-fill"></i>
+            </span>
+          </div>
+          <div class="service-content">
+            <h2>Rekomendasi Hotel Berkelas hingga Backpacker</h2>
+            <p>
+              Menginap dan Booking Hotel mudah, kami menyediakan banyak
+              rekomendasi penginapan untuk anda. Tanpa khawatir dengan budget
+              liburan yang anda pegang saat ini.
+            </p>
+            <button id="booking" type="button" class="btn">Lebih Lanjut..</button>
+          </div>
+        </article>
+
+        <!-- Keterangan 4 -->
+        <article class="service">
+          <div class="service-icon">
+            <span>
+              <i class="ri-group-2-fill"></i>
+            </span>
+          </div>
+          <div class="service-content">
+            <h2>Komunitas</h2>
+            <p>
+              Bergabung dan saling mengenal antar pengunjung lain lewat
+              Komunitas Online yang kami kembangkan, seru berbagi pengalaman,
+              kesan dan berbagai hal lainnya.
+            </p>
+            <button type="button" class="btn">Coming Soon..</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+
+    <section class="tour" id="tour">
+      <div class="sec-width">
+        <div class="title">
+          <h2>Tour Guide Kami</h2>
+        </div>
+        <div class="tour-container">
+          <!-- Tour Guide 1 -->
+          <div class="tour">
+            <div class="rating">
+              <span><i class="ri-star-fill"></i></span>
+              <span><i class="ri-star-half-line"></i></span>
+            </div>
+            <h3>Ananda</h3>
+            <p>
+              Kadang ga tau malu tapi lagi lucu-lucunya, pesarkas handal, banyak muka, suka menghibur.
+            </p>
+            <img src="../img/nando.jpg" alt="tour image" />
+            <span>Jakarta, Tanggerang Selatan</span>
+          </div>
+        
+          <!-- Tour Guid 2 -->
+          <div class="tour">
+            <div class="rating">
+              <span><i class="ri-star-fill"></i></span>
+              <span><i class="ri-star-fill"></i></span>
+              <span><i class="ri-star-fill"></i></span>
+              <span><i class="ri-star-fill"></i></span>
+              <span><i class="ri-star-fill"></i></span>
+            </div>
+            <h3>Mas Romi</h3>
+            <p>
+              Baik, sopan, memiliki kemauan keras, rajin mengaji, menabung 
+              dan tidak sombong. Full Skill disegala bidang.
+            </p>
+            <img src="../img/masrom.jpg" alt="tour image" />
+            <span>Jawa Tengah, Boyolali</span>
+          </div>
+    
+          <!-- Tour Guide 3 -->
+          <div class="tour">
+            <div class="rating">
+              <span><i class="ri-star-fill"></i></span>
+              <span><i class="ri-star-fill"></i></span>
+              <span><i class="ri-star-fill"></i></span>
+              <span><i class="ri-star-fill"></i></span>
+            </div>
+            <h3>Tigana Reymansyah</h3>
+            <p>
+              Humble, baik dan mengikis budget makan selama memandu anda.
+            </p>
+            <img src="../img/rey.jpg" alt="tour image" />
+            <span>Sibolga city of the sea</span>
+          </div>
+      
+        </div>
+      </div>
+    </section>
+  
+
+    <!-- Bagian Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div>
+          <h2>Media Sosial</h2>
+          <ul class="social-icons">
+            <li class="flex">
+              <i class="ri-twitter-line"></i>
+            </li>
+            <li class="flex">
+              <i class="ri-facebook-circle-line"></i>
+            </li>
+            <li class="flex">
+              <i class="ri-instagram-line"></i>
+            </li>
+          </ul>
+        </div>
+
+    </footer>
+
+    <!-- Sekrip Js -->
+    <script src="script.js"></script>
+  </body>
+</html>

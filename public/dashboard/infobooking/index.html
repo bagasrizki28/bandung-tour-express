@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <table class="content-table">
+      <h2>Info Booking</h2>
+      <thead>
+        <tr>
+          <th>Id_Kamar</th>
+          <th>Tanggal Check-In</th>
+          <th>Tanggal Check-Out</th>
+          <th>Jumlah Dewasa</th>
+          <th>Jumlah Anak-anak</th>
+          <th>Tipe Kamar</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <a href="/dashboard/homepage/index.html"><h2>Kembali ke Beranda</h2></a>
+    <script>
+      if (!localStorage.getItem("token")) {
+        location.href = "/login";
+      }
+
+      fetch("/api/booking", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          for (let i = 0; i < data.length; i++) {
+            const tr = document.createElement("tr");
+
+            const tdIdKamar = document.createElement("td");
+            tdIdKamar.textContent = data[i].id_kamar;
+            tr.appendChild(tdIdKamar);
+
+            const tdDateCheckIn = document.createElement("td");
+            tdDateCheckIn.textContent = data[i].date_check_in;
+            tr.appendChild(tdDateCheckIn);
+
+            const tdDateCheckOut = document.createElement("td");
+            tdDateCheckOut.textContent = data[i].date_check_out;
+            tr.appendChild(tdDateCheckOut);
+
+            const tdAdult = document.createElement("td");
+            tdAdult.textContent = data[i].adult;
+            tr.appendChild(tdAdult);
+
+            const tdChild = document.createElement("td");
+            tdChild.textContent = data[i].child;
+            tr.appendChild(tdChild);
+
+            const tdRoomType = document.createElement("td");
+            tdRoomType.textContent = data[i].room_type;
+            tr.appendChild(tdRoomType);
+
+            const tdDetail = document.createElement("td");
+            const anchorDetail = document.createElement("a");
+            anchorDetail.textContent = "Detail";
+            anchorDetail.href = `/dashboard/detailbooking?id_kamar=${data[i].id_kamar}`;
+            tdDetail.appendChild(anchorDetail);
+            tr.appendChild(tdDetail);
+
+            const tdEdit = document.createElement("td");
+            const anchorEdit = document.createElement("a");
+            anchorEdit.textContent = "Ubah Tanggal";
+            anchorEdit.href = `/dashboard/editbooking?id_kamar=${data[i].id_kamar}`;
+            tdEdit.appendChild(anchorEdit);
+            tr.appendChild(tdEdit);
+
+            const tdDelete = document.createElement("td");
+            const buttonDelete = document.createElement("button");
+            buttonDelete.textContent = "Selesai";
+            buttonDelete.onclick = () => {
+              if (confirm(`Apakah anda telah menyatakan selesai menginap?`)) {
+                fetch(`/api/booking/${data[i].id_kamar}`, {
+                  method: "DELETE",
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  },
+                });
+                location.reload();
+              }
+            };
+            tdDelete.appendChild(buttonDelete);
+            tr.appendChild(tdDelete);
+
+            document.querySelector("tbody").appendChild(tr);
+          }
+        });
+    </script>
+  </body>
+</html>
